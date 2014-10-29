@@ -1,0 +1,23 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+img.avatar-icon {
+  height: 200px;
+  width: 200px;
+}
+
+.avatar-icon {
+  border-radius: 3px;
+  opacity: 0.5;
+}
+
+.avatar-icon:hover {
+  border-radius: 10px;
+  opacity: 1.0;
+}

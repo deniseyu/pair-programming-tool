@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  h1= title
+  p Makers Academy Pair Programming Tool
+
+  // Wrapper
+  #wrapper
+
+    // PAIRING CHART
+    #pairingChart
+
+      h2 Pairing Chart
+
+      section
+
+      table
+        tbody
+
+    // /PAIRING CHART
+
+    // ADD USER
+    h2 Add a new user
+    #addUser
+      fieldset
+        input#inputUserName(type='text', placeholder='github username')
+        input#inputFullName(type='text', placeholder='real name')
+        button#btnAddUser Add User
+    // /ADD USER
+
+  // /WRAPPER
