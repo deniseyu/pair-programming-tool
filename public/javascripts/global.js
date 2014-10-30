@@ -11,16 +11,16 @@ function populateTable(){
   var profilePicture = '';
   $.getJSON('/users/userlist', function(data){
     userListData = data;
-    $.each(data, function(){
-      userInfo += '<div id="' + this.username + '" data-user="' + this.username +'" class="hover">' + this.username + '<br>' + this.fullname + '</div>';
-      userInfo += '<a href="#" class="linkdeleteuser" rel="' + this._id + '">delete</a>';
-      $.get(this.githubProfile + "?client_id=c7858876a6ef8352b200&client_secret=f09d82db277445b1e9beb9f45a373d41edfba637", function(APIbody){
-        profilePicture += '<span>'
-        profilePicture += '<div class="username">' + APIbody.login + '</div>'
-        profilePicture += '<img src="' + APIbody.avatar_url + '" class="avatar-icon">';
-        profilePicture += '</span>'
-        $('#pairingChart section').html(userInfo);
-        $('#pairingChart table tbody').html(profilePicture);
+    $.each(data, function(err, user){
+      $.get(user.githubProfile + "?client_id=c7858876a6ef8352b200&client_secret=f09d82db277445b1e9beb9f45a373d41edfba637", function(APIbody){
+        userInfo += '<article class="userSelect" id="' + user.username + '" data-user="' + user.username +
+        '" class="hover"><header><h1>' + user.username + '</h1><h2>' + user.fullname + '</h2>';
+        userInfo += '<aside><a href="#" class="linkdeleteuser" rel="' + user._id + '">delete</a></aside></header>';
+        userInfo += '<div class="username">' + user.username + '</div>'
+        userInfo += '<img src="' + APIbody.avatar_url + '" class="avatar-icon">';
+        userInfo += '</article>'
+        $('#pairingChart section.users').html(userInfo);
+        // $('#pairingChart section.users').html(profilePicture);
       });
     });
   });

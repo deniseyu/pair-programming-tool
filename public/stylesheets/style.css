@@ -28,22 +28,25 @@ div.username {
   background-color: black;
 }
 
-#pairingChart table tbody span {
+#pairingChart article {
   display: inline-block;
-  margin-top: -15px;
+  /*margin-top: -15px;*/
   margin: 5px;
   opacity: 0.5;
   height: 200px;
 }
 
-#pairingChart table tbody span:hover {
+#pairingChart header {
+  text-align: center;
+}
+
+#pairingChart aside {
+  text-align: center;
+  font-size: 0.5em;
+  margin-bottom: -30px;
+}
+
+#pairingChart article:hover {
   opacity: 1.0;
 }
 
-div.hover_over {
-  display: none;
-  position: absolute;
-  left: 30px;
-  top: -30px;
-  z-index: 999;
-}
