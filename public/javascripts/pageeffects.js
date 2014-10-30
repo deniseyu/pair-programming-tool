@@ -1,7 +1,10 @@
-$(document).ready(function(){
+// $(document).ready(function(){
 
-  $('.userSelect').on('click', function() {
-    $(this)
-  });
+//   $('.userSelect').on('click', function(){
+//     console.log("Hello")
+//   });
 
-});
+
+
+// });
+

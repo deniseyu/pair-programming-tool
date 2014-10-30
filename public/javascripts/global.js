@@ -1,27 +1,36 @@
 var userListData = [];
 
-$(document).ready(function(){
-  populateTable();
+var userSelector
+
+$(window).load(function(){
+
+  populateTable()
+
   $('#btnAddUser').on('click', addUser);
+
   $('#pairingChart section').on('click', 'a.linkdeleteuser', deleteUser);
+  
+  $('#pairingChart section').on('click', '.userSelect', function(){
+    $(this).find('header').toggleClass('hiddenFieldShow')
+  })
+
 });
+
 
 function populateTable(){
   var userInfo = '';
-  var profilePicture = '';
   $.getJSON('/users/userlist', function(data){
     userListData = data;
     $.each(data, function(err, user){
       $.get(user.githubProfile + "?client_id=c7858876a6ef8352b200&client_secret=f09d82db277445b1e9beb9f45a373d41edfba637", function(APIbody){
-        userInfo += '<article class="userSelect" id="' + user.username + '" data-user="' + user.username +
-        '" class="hover"><header><h1>' + user.username + '</h1><h2>' + user.fullname + '</h2>';
+        userInfo += '<article class="userSelect" id="' + user.username + '" data-user="' + user.username + '">'
+        userInfo += '<header class="hiddenField"><h1>' + user.username + '</h1><h2>' + user.fullname + '</h2>';
         userInfo += '<aside><a href="#" class="linkdeleteuser" rel="' + user._id + '">delete</a></aside></header>';
-        userInfo += '<div class="username">' + user.username + '</div>'
         userInfo += '<img src="' + APIbody.avatar_url + '" class="avatar-icon">';
+        userInfo += '<footer class="username">' + user.username + '</footer>'
         userInfo += '</article>'
         $('#pairingChart section.users').html(userInfo);
-        // $('#pairingChart section.users').html(profilePicture);
-      });
+       });
     });
   });
 }
@@ -83,5 +92,7 @@ function deleteUser(event){
     return false;
   }
 };
+
+
 
 

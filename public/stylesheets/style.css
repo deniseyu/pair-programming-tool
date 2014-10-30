@@ -8,7 +8,7 @@ a {
 }
 
 img.avatar-icon {
-  height: 200px;
+  z-index: 1;
   width: 200px;
 }
 
@@ -16,34 +16,56 @@ img.avatar-icon {
   background-color: red;
 }
 
-div.username {
+footer.username {
   font-family: 'Exo', sans-serif;
   font-size: 1.7em;
   text-align: center;
   color: white;
-  position: relative;
-  top: 200px;
+  position: absolute;
+  top: 165px;
+  left: 0px;
   width: 200px;
   height: 35px;
   background-color: black;
 }
 
-#pairingChart article {
-  display: inline-block;
-  /*margin-top: -15px;*/
-  margin: 5px;
-  opacity: 0.5;
-  height: 200px;
+header.hiddenField, .hiddenFieldShow {
+  text-align: center;
+  vertical-align: middle;
+  width: 150px;
+  height: 75px;
+  background-color: yellow;
+  position: absolute;
+  z-index: 2;
+  top: -5px;
+  left: 50px;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-#pairingChart header {
-  text-align: center;
+header.hiddenField {
+  visibility: hidden;
+}
+
+header.hiddenFieldShow {
+  visibility: visible;
+}
+
+#pairingChart article {
+  display: inline-block;
+  height: 200px;
+  opacity: 0.5;
+  position: relative;
+  margin-top: -3px;
+  /*vertical-align: middle;*/
+  /*margin-top: -50px;*/
+  /*margin-bottom: -50px;*/
 }
 
 #pairingChart aside {
   text-align: center;
-  font-size: 0.5em;
-  margin-bottom: -30px;
+  font-size: 1em;
+  /*margin-bottom: -60px;*/
 }
 
 #pairingChart article:hover {
