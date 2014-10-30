@@ -12,12 +12,38 @@ img.avatar-icon {
   width: 200px;
 }
 
-.avatar-icon {
-  border-radius: 3px;
-  opacity: 0.5;
+#activeUsers table thead {
+  background-color: red;
 }
 
-.avatar-icon:hover {
-  border-radius: 10px;
+div.username {
+  font-family: 'Exo', sans-serif;
+  font-size: 1.7em;
+  text-align: center;
+  color: white;
+  position: relative;
+  top: 200px;
+  width: 200px;
+  height: 35px;
+  background-color: black;
+}
+
+#pairingChart table tbody span {
+  display: inline-block;
+  margin-top: -15px;
+  margin: 5px;
+  opacity: 0.5;
+  height: 200px;
+}
+
+#pairingChart table tbody span:hover {
   opacity: 1.0;
+}
+
+div.hover_over {
+  display: none;
+  position: absolute;
+  left: 30px;
+  top: -30px;
+  z-index: 999;
 }

@@ -12,11 +12,15 @@ function populateTable(){
   $.getJSON('/users/userlist', function(data){
     userListData = data;
     $.each(data, function(){
-      // userInfo += '<div id="hover_over_' + this.username + '">' + this.username + '<br>' + this.fullname + '</div>';
-      // userInfo += '<a href="#" class="linkdeleteuser" rel="' + this._id + '">delete</a>';
+      userInfo += '<div id="' + this.username + '" data-user="' + this.username +'" class="hover">' + this.username + '<br>' + this.fullname + '</div>';
+      userInfo += '<a href="#" class="linkdeleteuser" rel="' + this._id + '">delete</a>';
       $.get(this.githubProfile + "?client_id=c7858876a6ef8352b200&client_secret=f09d82db277445b1e9beb9f45a373d41edfba637", function(APIbody){
-        userInfo += '<img src="' + APIbody.avatar_url + '" class="avatar-icon">';
+        profilePicture += '<span>'
+        profilePicture += '<div class="username">' + APIbody.login + '</div>'
+        profilePicture += '<img src="' + APIbody.avatar_url + '" class="avatar-icon">';
+        profilePicture += '</span>'
         $('#pairingChart section').html(userInfo);
+        $('#pairingChart table tbody').html(profilePicture);
       });
     });
   });
