@@ -4,22 +4,22 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var passport = require('passport');
-var util = require('util')
-var GitHubStrategy = require('password-github').Strategy;
+// var passport = require('passport');
+// var util = require('util')
+// var GitHubStrategy = require('password-github').Strategy;
 
 // Github OAuth
-var GITHUB_CLIENT_ID = "--insert-github-client-id-here--";
-var GITHUB_CLIENT_SECRET = "--insert-github-client-secret-here--";
+// var GITHUB_CLIENT_ID = "--insert-github-client-id-here--";
+// var GITHUB_CLIENT_SECRET = "--insert-github-client-secret-here--";
 
 // Passport session setup 
-passport.serializeUser(function(user, done){
-    done(null, user);
-});
+// passport.serializeUser(function(user, done){
+//     done(null, user);
+// });
 
-passport.deserializeUser(function(obj, done){
-    done(null, obj);
-});
+// passport.deserializeUser(function(obj, done){
+//     done(null, obj);
+// });
 
 
 var routes = require('./routes/index');
@@ -45,17 +45,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // passport 
-passport.use(new GitHubStrategy({
-    clientID: GITHUB_CLIENT_ID,
-    clientSecret: GITHUB_CLIENT_SECRET,
-    callbackURL: "http://127.0.0.1:3000/auth/github/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-    User.findOrCreate({ githubId: profile.id }, function (err, user) {
-      return done(err, user);
-    });
-  }
-));
+// passport.use(new GitHubStrategy({
+//     clientID: GITHUB_CLIENT_ID,
+//     clientSecret: GITHUB_CLIENT_SECRET,
+//     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+//   },
+//   function(accessToken, refreshToken, profile, done) {
+//     User.findOrCreate({ githubId: profile.id }, function (err, user) {
+//       return done(err, user);
+//     });
+//   }
+// ));
 
 // make db accessible for router
 app.use(function(req, res, next){
@@ -97,5 +97,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
+app.listen(3000);
 
 module.exports = app;
