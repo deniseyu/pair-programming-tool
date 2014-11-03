@@ -11,11 +11,12 @@ $(window).load(function(){
   $('#pairingChart section').on('click', 'a.linkdeleteuser', deleteUser);
   
   $('#pairingChart section').on('click', '.userSelect', function(){
-    $(this).find('header').toggleClass('hiddenFieldShow')
-  })
-
+    $('.hiddenFieldShow').fadeOut(function(){
+      $(this).toggleClass('hiddenFieldShow');
+    });
+    $(this).find('header').toggleClass('hiddenFieldShow').hide().fadeIn();
+  });
 });
-
 
 function populateTable(){
   var userInfo = '';
@@ -34,7 +35,6 @@ function populateTable(){
     });
   });
 }
-
 
 function addUser(event) {
   event.preventDefault();

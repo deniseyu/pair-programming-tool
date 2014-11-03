@@ -4,13 +4,30 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var passport = require('passport');
+var util = require('util')
+var GitHubStrategy = require('password-github').Strategy;
 
-// database shizz
+// Github OAuth
+var GITHUB_CLIENT_ID = "--insert-github-client-id-here--";
+var GITHUB_CLIENT_SECRET = "--insert-github-client-secret-here--";
+
+// Passport session setup 
+passport.serializeUser(function(user, done){
+    done(null, user);
+});
+
+passport.deserializeUser(function(obj, done){
+    done(null, obj);
+});
+
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+// database
 var mongo = require('mongoskin')
-// important! this is the name of the database, not the directory! d'oh!!!
+// this is the name of the database, not the directory
 var db = mongo.db("mongodb://localhost:27017/pairingchart1", {native_parser:true});
 
 var app = express();
@@ -26,6 +43,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// passport 
+passport.use(new GitHubStrategy({
+    clientID: GITHUB_CLIENT_ID,
+    clientSecret: GITHUB_CLIENT_SECRET,
+    callbackURL: "http://127.0.0.1:3000/auth/github/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate({ githubId: profile.id }, function (err, user) {
+      return done(err, user);
+    });
+  }
+));
 
 // make db accessible for router
 app.use(function(req, res, next){

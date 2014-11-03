@@ -8,7 +8,7 @@ a {
 }
 
 img.avatar-icon {
-  z-index: 1;
+  z-index: 2;
   width: 200px;
 }
 
@@ -34,20 +34,25 @@ header.hiddenField, .hiddenFieldShow {
   vertical-align: middle;
   width: 150px;
   height: 75px;
-  background-color: yellow;
+  background-color: black;
+  border: 2px white solid;
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   top: -5px;
   left: 50px;
   padding: 10px;
   border-radius: 5px;
+  opacity: 1.0;
+  color: white;
 }
 
 header.hiddenField {
+  z-index: 3;
   visibility: hidden;
 }
 
 header.hiddenFieldShow {
+  z-index: 3;
   visibility: visible;
 }
 
@@ -57,18 +62,35 @@ header.hiddenFieldShow {
   opacity: 0.5;
   position: relative;
   margin-top: -3px;
-  /*vertical-align: middle;*/
-  /*margin-top: -50px;*/
-  /*margin-bottom: -50px;*/
+  z-index: 1;
 }
 
 #pairingChart aside {
   text-align: center;
   font-size: 1em;
-  /*margin-bottom: -60px;*/
 }
 
 #pairingChart article:hover {
+  opacity: 1.0;
+}
+
+#pairingChart article.userSelect {
+  display: inline-block;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: transform;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+}
+
+#pairingChart article.userSelect:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
   opacity: 1.0;
 }
 
