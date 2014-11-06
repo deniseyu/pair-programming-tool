@@ -16,7 +16,7 @@ var mongo = require('mongoskin')
 var GITHUB_CLIENT_ID = process.env.GH_CLIENT_ID;
 var GITHUB_CLIENT_SECRET = process.env.GH_CLIENT_SECRET;
 
-// Passport session setup 
+// Passport session setup
  passport.serializeUser(function(user, done){
      done(null, user);
 });
@@ -44,18 +44,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(passport.initialize());
 app.use(passport.session());
-// passport 
-passport.use(new GitHubStrategy({
-     clientID: GITHUB_CLIENT_ID,
-     clientSecret: GITHUB_CLIENT_SECRET,
-     callbackURL: "http://127.0.0.1:3000/auth/github/callback"
-   },
-   function(accessToken, refreshToken, profile, done) {
-     User.findOrCreate({ githubId: profile.id }, function (err, user) {
-       return done(err, user);
-     });
-   }
- ));
+
+authentication.authenticate(passport);
+
+
 
 
 // make db accessible for router
@@ -67,16 +59,14 @@ app.use(function(req, res, next){
 app.use('/', routes);
 app.use('/users', users);
 
-app.get('/account', ensureAuthenticated, function(req, res){
-    res.render('account', { user: req.user });
-});
+
 
 app.get('/auth/github',
     passport.authenticate('github'),
     function(req, res){
              });
 
-app.get('/auth/github/callback', 
+app.get('/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
     res.redirect('/');
@@ -126,3 +116,5 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login')
 }
+
+
