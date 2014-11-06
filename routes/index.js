@@ -22,12 +22,15 @@ router.get('/', function(req, res) {
 //   function(req, res){
 // });
 
-// router.get('/auth/github/callback', 
+// router.get('/auth/github/callback',
 //   passport.authenticate('github', { failureRedirect: '/login' }),
 //   function(req, res){
 //     res.redirect('/');
 // });
 
+app.get('/account', ensureAuthenticated, function(req, res){
+    accountController.render(req, res);
+});
 
 
 module.exports = router;
